@@ -1,0 +1,5 @@
+export const InputActionsTypes = {
+    TOGGLE_DURATION: "TOGGLE_DURATION",
+    UPDATE_INPUT: "UPDATE_INPUT",
+    RESET_INPUT: "RESET_INPUT"
+  };

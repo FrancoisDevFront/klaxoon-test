@@ -1,0 +1,13 @@
+.listInfo- {
+  &delete {
+    padding: 0 10px;
+    color: red;
+    cursor: pointer;
+  }
+
+  &edit {
+    padding: 0 10px;
+    color: blue;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,39 @@
+.listItem {
+    display: flex;
+    flex-direction: row;
+
+    td {
+        overflow: hidden;
+    }
+   
+    &-title {
+        font-size: 16px;
+        font-weight: bold;
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;    
+    }
+
+    &-origins {
+        p:first-child {
+            font-weight: bold;
+        }
+
+        p:last-child {
+            color: #999;
+        }
+    }
+
+    &-url {
+        padding: 0 10px;
+        color: #fff;
+        font-weight: bold;
+        overflow-x: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    &-url:hover {
+        text-decoration: underline;
+    }
+}
+

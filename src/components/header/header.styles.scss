@@ -1,0 +1,23 @@
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 10px 60px;
+    -webkit-box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.55);
+    -moz-box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.55);
+    box-shadow: 0px 10px 10px -5px rgba(0,0,0,0.55);
+
+    .link {
+        font-weight: 600;
+
+        &:hover {
+            text-decoration: underline;
+        }
+
+
+        &:first-child {
+            margin-right: 15px;
+        }
+    }
+}
