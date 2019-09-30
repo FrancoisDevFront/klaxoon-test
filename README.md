@@ -1,6 +1,10 @@
 
 ### - Do git clone
     git clone https://github.com/FrancoisDevFront/klaxoon-test.git
+### - Move to app repertory
+
+    cd klaxoon-test
+
 ### - Before everythings do `npm install` to load node_module dependecies
 
     npm install
