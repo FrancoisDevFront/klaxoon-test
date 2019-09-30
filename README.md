@@ -1,8 +1,13 @@
+
 ### - Do git clone
-...
-git clone https://github.com/FrancoisDevFront/klaxoon-test.git
-...
+    git clone https://github.com/FrancoisDevFront/klaxoon-test.git
 ### - Before everythings do `npm install` to load node_module dependecies
+
+    npm install
+### - To launch the app in local you can do
+
+    npm start
+
 ## Available Scripts
 
 In the project directory, you can run:
