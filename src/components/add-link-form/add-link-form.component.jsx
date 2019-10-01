@@ -35,13 +35,21 @@ const AddLinkForm = ({
   active
 }) => {
   var buttonLabel = "Ajouter un lien";
-  const { url, title, author, date, width, height, duration, tags, category } = inputValues;
-  if(category === "Vidéo") {
+  const {
+    url,
+    title,
+    author,
+    date,
+    width,
+    height,
+    duration,
+    tags,
+    category
+  } = inputValues;
+  if (category === "Vidéo") {
     toggleVisibility(false);
   } else {
-    if (category === "Photo") {
-      toggleVisibility(true);
-    }
+    toggleVisibility(true);
   }
   const KeyCodes = {
     comma: 188,
@@ -84,10 +92,10 @@ const AddLinkForm = ({
   const handleDelete = i => {
     console.log(i);
     const tags = inputValues.tags;
-    if(i === 0) {
-      tags.splice(i, i+1)
+    if (i === 0) {
+      tags.splice(i, i + 1);
     } else {
-      tags.splice(i, i)
+      tags.splice(i, i);
     }
     updateInput(inputValues);
   };
