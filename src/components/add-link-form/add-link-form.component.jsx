@@ -35,8 +35,14 @@ const AddLinkForm = ({
   active
 }) => {
   var buttonLabel = "Ajouter un lien";
-  const { url, title, author, date, width, height, duration } = inputValues;
-  const tags = inputValues.tags;
+  const { url, title, author, date, width, height, duration, tags, category } = inputValues;
+  if(category === "Vidéo") {
+    toggleVisibility(false);
+  } else {
+    if (category === "Photo") {
+      toggleVisibility(true);
+    }
+  }
   const KeyCodes = {
     comma: 188,
     enter: 13
@@ -65,13 +71,14 @@ const AddLinkForm = ({
         data[key] = inputValues[key];
       }
     }
+    if (name === "category") {
+      var hiddenNewVal = value === "Vidéo" ? false : true;
+      data["category"] = value;
+      toggleVisibility(hiddenNewVal);
+    }
     // Mise a jours du state correspondant à la value de chaque input au onChange
     updateInput(data);
     // Affichage du champs duration en fonction de la catégory choisie
-    if (name === "category") {
-      var hiddenNewVal = value === "Video" ? false : true;
-      toggleVisibility(hiddenNewVal);
-    }
   };
 
   const handleDelete = i => {
@@ -134,7 +141,8 @@ const AddLinkForm = ({
       <FormGroup
         type="section"
         handleChange={handleChange}
-        options={["Photo", "Video"]}
+        options={["Photo", "Vidéo"]}
+        category={category}
         name="category"
         label="Category"
         required

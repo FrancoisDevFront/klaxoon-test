@@ -3,15 +3,15 @@ import { Form } from "react-bootstrap";
 
 import "./form-group.styles.scss";
 
-const FormGroup = ({handleChange, label, options, type, ...otherProps }) => (
+const FormGroup = ({handleChange, label, options, type, category, ...otherProps }) => (
   <Form.Group className="formGroup">
     {label ? <Form.Label>{label}</Form.Label> : null}
     {
       (type === "section" ? (
-        <Form.Control as="select" onChange={handleChange} {...otherProps}>
+        <Form.Control as="select" value={category} onChange={handleChange} {...otherProps}>
           {
               options.map((option, index) => (
-                <option key={index}>{option}</option>
+                <option key={index} value={option}>{option}</option>
               ))
           }
         </Form.Control>

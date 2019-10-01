@@ -25,14 +25,14 @@ class EditLinkModal extends React.Component {
   }
 
   handleClose = () => {
-    const { toggleAdd, resetInput, setEditLinkId } = this.props;
-    toggleAdd();
+    const { toggleEdit, resetInput, setEditLinkId } = this.props;
+    toggleEdit();
     resetInput();
     setEditLinkId(null);
   };
 
   componentDidMount() {
-    const { toggleVisibility, linkToEdit } = this.props;
+    const { toggleVisibility } = this.props;
     toggleVisibility("true");
   }
 
@@ -57,7 +57,7 @@ class EditLinkModal extends React.Component {
 
     return (
       <div>
-        <Modal show={modalsVisibility.editVisibility} onHide={toggleEdit}>
+        <Modal show={modalsVisibility.editVisibility} onHide={this.handleClose}>
           <Modal.Header closeButton>
             <Modal.Title>Edit Link</Modal.Title>
           </Modal.Header>
@@ -67,7 +67,7 @@ class EditLinkModal extends React.Component {
           </Modal.Body>
 
           <Modal.Footer>
-            <Button variant="secondary" onClick={toggleEdit}>
+            <Button variant="secondary" onClick={this.handleClose}>
               Close
             </Button>
           </Modal.Footer>
