@@ -7,6 +7,7 @@ const INITIAL_STATE = {
     title: "",
     author: "",
     date: "",
+    tags: [],
     width: "",
     height: "",
     duration: ""
@@ -29,6 +30,11 @@ const inputReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         inputStatesValues: INITIAL_STATE.inputStatesValues
+      };
+    case InputActionsTypes.SET_KEYWORD:
+      return {
+        ...state,
+        inputStatesValues: action.payload
       };
     default:
       return state;

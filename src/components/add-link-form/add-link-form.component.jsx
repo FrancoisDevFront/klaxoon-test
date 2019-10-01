@@ -1,7 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { Button } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
+
+import { WithContext as ReactTags } from "react-tag-input";
 
 import "./add-link-form.styles.scss";
 
@@ -15,9 +17,11 @@ import {
   toggleVisibility,
   updateInput
 } from "../../redux/input/input.actions.js";
-import { selectLinksItems, selectLinkActive } from "../../redux/links/links.selectors.js";
+import {
+  selectLinksItems,
+  selectLinkActive
+} from "../../redux/links/links.selectors.js";
 import { addLinkItem, updateLinkItem } from "../../redux/links/links.utils.js";
-import { log } from "util";
 
 const AddLinkForm = ({
   hidden,
@@ -32,6 +36,12 @@ const AddLinkForm = ({
 }) => {
   var buttonLabel = "Ajouter un lien";
   const { url, title, author, date, width, height, duration } = inputValues;
+  const tags = inputValues.tags;
+  const KeyCodes = {
+    comma: 188,
+    enter: 13
+  };
+  const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
   if (linkData) {
     buttonLabel = "Editer le lien";
@@ -62,6 +72,22 @@ const AddLinkForm = ({
       var hiddenNewVal = value === "Video" ? false : true;
       toggleVisibility(hiddenNewVal);
     }
+  };
+
+  const handleDelete = i => {
+    console.log(i);
+    const tags = inputValues.tags;
+    if(i === 0) {
+      tags.splice(i, i+1)
+    } else {
+      tags.splice(i, i)
+    }
+    updateInput(inputValues);
+  };
+
+  const handleAddition = tag => {
+    inputValues.tags.push(tag);
+    updateInput(inputValues);
   };
 
   return (
@@ -98,6 +124,13 @@ const AddLinkForm = ({
         label="Date"
         required
       ></FormGroup>
+      <Form.Label>Keywords</Form.Label>
+      <ReactTags
+        tags={tags}
+        handleDelete={handleDelete}
+        handleAddition={handleAddition}
+        delimiters={delimiters}
+      />
       <FormGroup
         type="section"
         handleChange={handleChange}
@@ -139,7 +172,8 @@ const AddLinkForm = ({
 
 const mapDispatchToProps = dispatch => ({
   toggleVisibility: visibility => dispatch(toggleVisibility(visibility)),
-  addLinkItem: (linksItems, link, pagination) => dispatch(addLinkItem(linksItems, link, pagination)),
+  addLinkItem: (linksItems, link, pagination) =>
+    dispatch(addLinkItem(linksItems, link, pagination)),
   updateInput: data => dispatch(updateInput(data)),
   updateLinkItem: (linksItems, inputValues) =>
     dispatch(updateLinkItem(linksItems, inputValues))
@@ -150,7 +184,7 @@ const mapStateToProps = state =>
     hidden: selectDurationVisibility,
     inputValues: selectInputStatesValues,
     linksItems: selectLinksItems,
-    active: selectLinkActive,
+    active: selectLinkActive
   });
 
 export default connect(

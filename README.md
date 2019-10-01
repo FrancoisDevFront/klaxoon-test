@@ -1,16 +1,4 @@
-
-### - Do git clone
-    git clone https://github.com/FrancoisDevFront/klaxoon-test.git
-### - Move to app repertory
-
-    cd klaxoon-test
-
-### - Before everythings do `npm install` to load node_module dependecies
-
-    npm install
-### - To launch the app in local you can do
-
-    npm start
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
 
