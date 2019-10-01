@@ -7,9 +7,9 @@ import "./link-item.styles.scss";
 import LinkIcon from "../list-icon/list-icon.component.jsx";
 
 import {
-  deleteLinkItem,
   setEditLinkId
 } from "../../redux/links/links.actions.js";
+import { deleteLinkItem } from '../../redux/links/links.utils.js';
 import { toggleEdit } from "../../redux/modal/modal.actions";
 
 const LinkItem = ({
@@ -18,7 +18,7 @@ const LinkItem = ({
   date,
   url,
   id,
-  removeLink,
+  deleteLinkItem,
   toggleEdit,
   setEditLinkId
 }) => {
@@ -44,14 +44,14 @@ const LinkItem = ({
       <LinkIcon
         erase
         code="&#10007;"
-        handleClick={() => removeLink(id)}
+        handleClick={() => deleteLinkItem(id)}
       ></LinkIcon>
     </tr>
   );
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeLink: id => dispatch(deleteLinkItem(id)),
+  deleteLinkItem: id => dispatch(deleteLinkItem(id)),
   toggleEdit: () => dispatch(toggleEdit()),
   setEditLinkId: id => dispatch(setEditLinkId(id))
 });

@@ -23,12 +23,6 @@ const linkReducer = (state = INITIAL_STATE, action) => {
         linksItems: state.linksItems
       };
       break;
-      case LinksActionsTypes.DELETE_LINK:
-      return {
-        ...state,
-        linksItems: deleteLinkItem(state.linksItems, action.payload)
-      };
-      break;
       case LinksActionsTypes.EDIT_ID:
       return {
         ...state,

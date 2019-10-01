@@ -10,11 +10,6 @@ export const addLinkItemAction = (link) => ({
   payload: link
 });
 
-export const deleteLinkItem = (idLinkToRemove) => ({
-  type: LinksActionsTypes.DELETE_LINK,
-  payload: idLinkToRemove
-});
-
 export const setEditLinkId = id => ({
   type: LinksActionsTypes.EDIT_ID,
   payload: id

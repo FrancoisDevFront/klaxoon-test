@@ -2,11 +2,11 @@ import { firestore } from "../../firebase/firebase.utils.js";
 import { fetchLinksItems, setShowedLink } from "./links.actions.js";
 import { resetInput } from "../input/input.actions";
 import { toggleAdd, toggleEdit } from "../modal/modal.actions";
-import { selectLinkActive } from '../links/links.selectors.js'
-import { store } from '../store.js';
+import { store } from "../store.js";
 
 export const getLinksItems = () => {
   var globalState = store.getState();
+  var pagination = globalState.links.active;
   const links = [];
 
   // On obtient la référence de la collection links
@@ -25,7 +25,7 @@ export const getLinksItems = () => {
             return links.push(currentLink);
           });
           dispatch(fetchLinksItems(links));
-          dispatch(updateShowedLink(links, globalState.links.active));
+          dispatch(updateShowedLink(links, pagination));
         } else {
           console.log("No such document!");
         }
@@ -52,7 +52,7 @@ export const addLinkItem = (linksItems, link, pagination) => {
         });
         data.push(link);
         dispatch(fetchLinksItems(data));
-        updateShowedLink(linksItems, pagination);
+        dispatch(updateShowedLink(data, pagination));
         dispatch(resetInput());
         dispatch(toggleAdd());
       })
@@ -81,26 +81,34 @@ export const updateLinkItem = (linksItems, inputValues) => {
   };
 };
 
-export const deleteLinkItem = (linksItems, docId) => {
-  firestore
-    .collection("links")
-    .doc(docId)
-    .delete()
-    .then(function() {
-      console.log("Document successfully deleted!");
-      return linksItems.filter(linkItem => linkItem.id !== docId);
-    })
-    .catch(function(error) {
-      console.error("Error removing document: ", error);
-      return linksItems;
-    });
-  return linksItems.filter(linkItem => linkItem.id !== docId);
+export const deleteLinkItem = docId => {
+  return dispatch => {
+    var globalState = store.getState();
+    var pagination = globalState.links.active;
+    var linksItems = globalState.links.linksItems;
+    firestore
+      .collection("links")
+      .doc(docId)
+      .delete()
+      .then(function() {
+        console.log("Document successfully deleted!");
+        var newList = linksItems.filter(linkItem => linkItem.id !== docId);
+        dispatch(fetchLinksItems(newList));
+        dispatch(updateShowedLink(newList, pagination));
+      })
+      .catch(function(error) {
+        console.error("Error removing document: ", error);
+        return linksItems;
+      });
+  };
 };
 
 export const updateShowedLink = (linksItems, pagination) => {
   return dispatch => {
     // Construction du tableau des liens visible en récupérant le numéro de pagination et l'ensemble des items
     var showedLink = [];
+    console.log(linksItems);
+    console.log(pagination);
     var startingIndex = (pagination - 1) * 4;
     console.log(startingIndex);
 
@@ -109,6 +117,8 @@ export const updateShowedLink = (linksItems, pagination) => {
         showedLink.push(linksItems[i]);
       }
     }
+    console.log(showedLink);
+
     dispatch(setShowedLink(showedLink));
   };
 };

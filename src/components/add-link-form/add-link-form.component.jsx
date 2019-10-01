@@ -32,7 +32,7 @@ const AddLinkForm = ({
   linkData,
   updateLinkItem,
   linksItems,
-  selectLinkActive
+  active
 }) => {
   var buttonLabel = "Ajouter un lien";
   const { url, title, author, date, width, height, duration } = inputValues;
@@ -51,7 +51,7 @@ const AddLinkForm = ({
     event.preventDefault();
     linkData
       ? updateLinkItem(linksItems, inputValues)
-      : addLinkItem(linksItems, inputValues, selectLinkActive);
+      : addLinkItem(linksItems, inputValues, active);
   };
 
   const handleChange = event => {
