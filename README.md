@@ -1,4 +1,25 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+### - Do git clone
+    git clone https://github.com/FrancoisDevFront/klaxoon-test.git
+### - Move to app repertory
+
+    cd klaxoon-test
+
+### - On mac make sure you have xcode-select installed
+
+    xcode-select --install
+### - Make sure the latest version of node and npm are installed
+https://nodejs.org/en/
+
+    node --version
+    npm --version
+
+### - Before everythings do `npm install` to load node_module dependecies
+
+    npm install
+### - To launch the app in local you can do
+
+    npm start
 
 ## Available Scripts
 
@@ -66,3 +87,4 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
